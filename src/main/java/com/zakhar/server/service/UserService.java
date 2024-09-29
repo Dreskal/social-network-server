@@ -2,9 +2,9 @@ package com.zakhar.server.service;
 
 
 import com.zakhar.server.entity.Users;
+import com.zakhar.server.exeptions.EntityNotFoundExceptions;
 import com.zakhar.server.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -19,7 +19,7 @@ public class UserService {
        String username = principal.getName();
 
        return userRepository.findByUsername(username).orElseThrow(
-               () -> new  UsernameNotFoundException(username + " not found")
+               () -> new EntityNotFoundExceptions(username + " not found")
        );
     }
 }
