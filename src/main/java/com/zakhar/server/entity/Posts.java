@@ -27,8 +27,6 @@ public class Posts {
     @Column(nullable = false, length = 3000)
     private String description;
 
-    private Integer reaction;
-
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss" )
     @Column(updatable = false )
     private LocalDateTime createDate;
@@ -39,4 +37,7 @@ public class Posts {
 
     @OneToMany(mappedBy = "post")
     private List<Comments> comments;
+
+    @OneToMany(mappedBy = "post")
+    private List<UserReactionPost> reactionPosts;
 }

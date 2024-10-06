@@ -17,7 +17,6 @@ public class PostsResponse {
     private Long id;
     private String title;
     private String description;
-    private Integer reaction;
     private LocalDateTime createDate;
     private UserDTO user;
     private List<CommentsResponse> comments;

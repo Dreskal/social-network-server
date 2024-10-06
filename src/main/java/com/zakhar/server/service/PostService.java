@@ -2,8 +2,11 @@ package com.zakhar.server.service;
 
 
 import com.zakhar.server.entity.Posts;
+import com.zakhar.server.entity.UserReactionPost;
 import com.zakhar.server.entity.Users;
+import com.zakhar.server.entity.keys.UserReactionPostKey;
 import com.zakhar.server.repository.PostRepository;
+import com.zakhar.server.repository.UserReactionPostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,7 @@ import java.util.List;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UserReactionPostRepository userReactionPostRepository;
     private final UserService userService;
 
     public List<Posts> getAll() {
@@ -27,11 +31,31 @@ public class PostService {
         Posts post = Posts.builder()
                 .title(title)
                 .description(description)
-                .reaction(0)
                 .createDate(LocalDateTime.now())
                 .user(currentUser)
                 .build();
         return postRepository.save(post);
+    }
+
+    public Posts reaction(Long id, Principal principal){
+
+        Users currentUser = userService.getByPrincipal(principal);
+        Posts post = get(id);
+
+        UserReactionPostKey userReactionPostKey = new UserReactionPostKey(
+                post.getId(),
+                currentUser.getId()
+        );
+
+        UserReactionPost userReactionPost = userReactionPostRepository
+                .findById(userReactionPostKey)
+                .orElse(new UserReactionPost(userReactionPostKey, post, currentUser, true));
+
+        userReactionPost.setLike(true);
+
+        userReactionPostRepository.save(userReactionPost);
+
+        return post;
     }
 
     public Posts get(Long id) {
