@@ -44,6 +44,6 @@ public class Users {
     @OneToMany(mappedBy = "user")
     private List<Comments> comments;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<UserReactionPost> reactionPosts;
 }

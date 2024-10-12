@@ -18,15 +18,16 @@ public class UserReactionPost {
     @EmbeddedId
     private UserReactionPostKey id;
 
-    @ManyToMany
+    @ManyToOne
     @MapsId("postId")
     @JoinColumn(name = "post_id")
     Posts post;
 
-    @ManyToMany
+    @ManyToOne
     @MapsId("userId")
     @JoinColumn(name = "user_id")
     Users user;
 
+    @Column(name = "is_like")
     private Boolean like;
 }

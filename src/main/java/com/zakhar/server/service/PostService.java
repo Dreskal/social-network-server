@@ -49,9 +49,10 @@ public class PostService {
 
         UserReactionPost userReactionPost = userReactionPostRepository
                 .findById(userReactionPostKey)
-                .orElse(new UserReactionPost(userReactionPostKey, post, currentUser, true));
+                .orElse(new UserReactionPost(userReactionPostKey, post, currentUser, false));
 
-        userReactionPost.setLike(true);
+
+        userReactionPost.setLike(!userReactionPost.getLike());
 
         userReactionPostRepository.save(userReactionPost);
 

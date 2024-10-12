@@ -63,10 +63,12 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
-//    @GetMapping("/{postId}/comments")
-//    public ResponseEntity<List<CommentsResponse>> getAllComments() {
-//        return null;
-//    }
+    @PatchMapping("/{id}/reaction")
+    public ResponseEntity<PostsResponse> reaction(@PathVariable Long id,
+                                                  Principal principal){
+        Posts posts = postService.reaction(id, principal);
+        return ResponseEntity.ok(map(posts));
+    }
 
     public PostsResponse map(Posts post){
         return modelMapper.map(post, PostsResponse.class);
