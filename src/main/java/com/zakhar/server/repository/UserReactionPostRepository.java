@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserReactionPostRepository extends JpaRepository<UserReactionPost, UserReactionPostKey> {
-    int countByPostAndLike(Posts post, boolean like);
 }

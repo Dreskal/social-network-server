@@ -3,7 +3,7 @@ package com.zakhar.server.controller.auth;
 
 import com.zakhar.server.DTO.request.AuthRequest;
 import com.zakhar.server.DTO.request.RegisterRequest;
-import com.zakhar.server.DTO.responce.AuthResponce;
+import com.zakhar.server.DTO.response.AuthResponce;
 import com.zakhar.server.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

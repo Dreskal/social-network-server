@@ -1,4 +1,4 @@
-package com.zakhar.server.DTO.responce;
+package com.zakhar.server.DTO.response;
 
 import com.zakhar.server.DTO.UserDTO;
 import lombok.AllArgsConstructor;
@@ -16,6 +16,7 @@ import java.util.List;
 public class PostsResponse {
     private Long id;
     private String title;
+    private Integer reaction;
     private String description;
     private LocalDateTime createDate;
     private UserDTO user;

@@ -3,7 +3,7 @@ package com.zakhar.server.service;
 
 import com.zakhar.server.DTO.request.AuthRequest;
 import com.zakhar.server.DTO.request.RegisterRequest;
-import com.zakhar.server.DTO.responce.AuthResponce;
+import com.zakhar.server.DTO.response.AuthResponce;
 import com.zakhar.server.entity.Contacts;
 import com.zakhar.server.entity.Users;
 import com.zakhar.server.entity.enums.ERole;
@@ -54,6 +54,7 @@ public class AuthService {
         String jwt = jwtService.generateToken(userDetails);
         return AuthResponce.builder().token(jwt).build();
     }
+
     public AuthResponce authenticate (AuthRequest request){
 
         authenticationManager.authenticate(

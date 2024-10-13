@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -22,9 +23,13 @@ public class Contacts {
     private String name;
 
     private String email;
+
     private boolean licence;
+
     private String country;
+
     private String bio;
+
     @JsonFormat(pattern = "yyyy-mm-dd HH:mm:ss" )
     private LocalDateTime birthDate;
 
@@ -33,4 +38,5 @@ public class Contacts {
         this.email = email;
         this.licence = licence;
     }
+
 }

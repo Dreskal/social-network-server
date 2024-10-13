@@ -1,4 +1,4 @@
-package com.zakhar.server.DTO.responce;
+package com.zakhar.server.DTO.response;
 
 import com.zakhar.server.DTO.UserDTO;
 import lombok.AllArgsConstructor;

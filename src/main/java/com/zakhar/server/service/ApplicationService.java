@@ -25,7 +25,7 @@ public class ApplicationService {
         Applications applications = Applications.builder()
                 .description(request.getDescription())
                 .createDate(LocalDateTime.now())
-                .dueDate(LocalDateTime.now().plusDays(7))  // в propertiers
+                .dueDate(LocalDateTime.now().plusDays(7))
                 .state(EState.NOT_VIEW)
                 .user(user)
                 .build();

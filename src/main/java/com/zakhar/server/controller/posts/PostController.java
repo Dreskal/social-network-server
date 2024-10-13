@@ -3,10 +3,11 @@ package com.zakhar.server.controller.posts;
 
 import com.zakhar.server.DTO.request.CommentRequest;
 import com.zakhar.server.DTO.request.PostsCreateRequest;
-import com.zakhar.server.DTO.responce.CommentsResponse;
-import com.zakhar.server.DTO.responce.PostsResponse;
+import com.zakhar.server.DTO.response.CommentsResponse;
+import com.zakhar.server.DTO.response.PostsResponse;
 import com.zakhar.server.entity.Comments;
 import com.zakhar.server.entity.Posts;
+import com.zakhar.server.mapper.PostResponseMapper;
 import com.zakhar.server.service.CommentService;
 import com.zakhar.server.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class PostController {
     private final PostService postService;
     private final CommentService commentService;
     private final ModelMapper modelMapper;
+    private final PostResponseMapper postResponseMapper;
 
     @PostMapping
     public ResponseEntity<PostsResponse> create(@RequestBody PostsCreateRequest request,
@@ -35,7 +37,7 @@ public class PostController {
                 request.getDescription(),
                 principal
         );
-        return new ResponseEntity<>(map(post),
+        return new ResponseEntity<>(postResponseMapper.map(post),
                 HttpStatus.CREATED
         );
     }
@@ -58,7 +60,7 @@ public class PostController {
         List<PostsResponse> posts =
                 postService.getAll()
                         .stream()
-                        .map(this::map)
+                        .map(postResponseMapper::map)
                         .toList();
         return ResponseEntity.ok(posts);
     }
@@ -67,11 +69,7 @@ public class PostController {
     public ResponseEntity<PostsResponse> reaction(@PathVariable Long id,
                                                   Principal principal){
         Posts posts = postService.reaction(id, principal);
-        return ResponseEntity.ok(map(posts));
-    }
-
-    public PostsResponse map(Posts post){
-        return modelMapper.map(post, PostsResponse.class);
+        return ResponseEntity.ok(postResponseMapper.map(posts));
     }
 
     public CommentsResponse map(Comments comments){
