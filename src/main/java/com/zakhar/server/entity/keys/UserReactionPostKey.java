@@ -13,6 +13,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Embeddable
 public class UserReactionPostKey implements Serializable {
     @Column(name = "post_id")
